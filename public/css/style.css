@@ -1,0 +1,118 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif
+}
+
+.w3-row-padding img {
+    margin-bottom: 12px
+}
+
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {
+    width: 120px;
+    background: #00396b;
+}
+
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {
+    margin-left: 120px
+}
+
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {
+    #main {
+        margin-left: 0
+    }
+}
+
+
+.perthSelectMenu_1{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_2{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_3{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_4{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_5{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_6{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_7{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_8{
+    background-color:#00396b !important;
+    color:white !important
+}
+.perthSelectMenu_9{
+    background-color:#00396b !important;
+    color:white !important
+}
+
+
+
+.perthSelectMenu_1:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_2:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_3:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_4:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_5:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_6:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_7:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_8:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+.perthSelectMenu_9:hover{
+    background-color:white !important;
+    color:#00396b !important
+}
+
+
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
