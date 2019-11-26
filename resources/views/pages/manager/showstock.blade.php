@@ -21,7 +21,7 @@
 @endsection
 
 @section('sidebar')
-    @include('layouts.sidebar.staff')
+    @include('layouts.sidebar.manager')
 @endsection
 
 @section('content')
@@ -36,6 +36,7 @@
             <tr>
                 <th>รหัสสินค้า</th>
                 <th>ชื่อ</th>
+                <th>คู่ค้า</th>
                 <th>จำนวนทั้งหมด</th>
                 <th>หน่วย</th>
 
@@ -43,6 +44,7 @@
             <tr>
                 <td>0000</td>
                 <td>nnnnnn</td>
+                <td>สมชาย</td>
                 <td>500</td>
                 <td>ชิ้น</td>
             </tr>

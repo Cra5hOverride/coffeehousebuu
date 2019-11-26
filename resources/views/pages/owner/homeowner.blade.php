@@ -2,6 +2,8 @@
 @section('title', 'Owner')
 
 @section('style')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
     <style>
         button {
             background-color: #00396b;
@@ -26,6 +28,13 @@
             <h1 class="w3-jumbo">หน้าหลัก</h1>
 
         </header>
-
+        <table style="width: 30% ;text-align:center; margin-top:20px;" align = "right">
+                <tr style="font-size:100%;">
+                <th>ชื่อ: {{$userlogin->name}}</th>
+                <th>นามสกุล: {{$userlogin->surname}}</th>
+                <th>ตำแหน่ง: {{$position}}</th>
+                </tr>
+    
+        </table>
     </div>
 @endsection

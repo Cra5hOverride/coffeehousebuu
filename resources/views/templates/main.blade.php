@@ -21,7 +21,12 @@
         @yield('content')
     </div>
 
+
     @include('js.v1')
+    @yield('js')
+    <script type="text/javascript">
+        @yield('javascript')
+    </script>
 
 </body>
 </html>

@@ -1,6 +1,8 @@
-@extends('templates.main')
-@section('title', 'Login')
-@section('style')
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -64,18 +66,22 @@
             }
         }
     </style>
-@endsection
-@section('content')
-    <form action="{{ route('login') }}" method="post" style="margin-top:5% ; background-color:white ; margin-left:25% ; margin-right:25% ; height:670px">
-        @csrf
-        <div class="imgcontainer">
+
+
+</head>
+
+<body style="background-color:#00396b">
+
+<form action="{{ route('login') }}" method="post" style="margin-top:5% ; background-color:white ; margin-left:25% ; margin-right:25% ; height:670px">
+    @csrf    
+    <div class="imgcontainer">
             <img src="images/logo.png" alt="Avatar" class="avatar" style="height:250px; width:250px ; margin-top:15px">
 
             <h2 style="color:#00396b ; font-size:32px ;">Coffee House BUU</h2>
 
         </div>
 
-        <div class="container" style="margin-right:30% ; margin-top:30px">
+        <div class="container" style="margin-left:30%; margin-right:30% ; margin-top:30px">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
 
@@ -88,4 +94,7 @@
 
 
     </form>
-@endsection
+
+</body>
+
+</html>

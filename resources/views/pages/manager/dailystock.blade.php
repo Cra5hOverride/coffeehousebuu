@@ -11,8 +11,11 @@
             margin: 8px 0;
             border: none;
             cursor: pointer;
-            width: 20%;
+            width: 8%;
         }
+        th {
+        text-align: center;
+    }
     </style>
 @endsection
 
@@ -24,24 +27,24 @@
 <div class="w3-padding-large" id="main">
     <!-- Header/Home -->
     <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-        <h1 class="w3-jumbo">Stockรายวัน</h1>
+        <h1 class="w3-jumbo">สต๊อกรายวัน</h1>
 
     </header>
     <div>
-        <div  style="width:100%;text-align: center;">
+        <div style="width:100%;text-align: center;margin-top:30px">
             <form action="">
-                Date: <input type="date" name="bday">
-                <button type="submit">Save</button>
+                วันที่ : <input type="date" name="bday" style="color: black;">
+                <button type="submit">ค้นหา</button>
             </form>
             <br>
         </div>
         <table style="width:100%;text-align: center;">
             <tr>
-                <th style="width:20%;">date XX/XX/XXXX</th>
-                <th>Detail</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+                <th style="width:20%;">วันที่ XX/XX/XXXX</th>
+                <th>รายละเอียด</th>
+                <th>จำนวน</th>
+                <th>ราคา</th>
+                <th>ยอดรวม</th>
             </tr>
             <tr>
                 <td>Stock in</td>

@@ -2,7 +2,6 @@
 @section('title', 'Addstaff')
 
 @section('style')
-
     <style>
         button {
             background-color: #00396b;
@@ -11,8 +10,12 @@
             margin: 8px 0;
             border: none;
             cursor: pointer;
-            width: 20%;
+            width: 40%;
         }
+        th {
+        width: 10%;
+        text-align: center;
+    }
     </style>
 @endsection
 
@@ -28,41 +31,194 @@
 
         </header>
         <div>
-            <table style="width:100%;text-align: center;">
+            <table style="width:100%;text-align: center;margin-top:30px;">
                 <tr>
-                    <th>name</th>
-                    <th>tel</th>
-                    <th>email</th>
-                    <th>branch</th>
-                    <th>type</th>
-                    <th>option</th>
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>อีเมล</th>
+                    <th>เบอร์โทรศัพท์</th>
+                    <th>สาขา</th>
+                    <th>บัตรประชาชน</th>
+                    <th>ตัวเลือก</th>
                 </tr>
+                @forelse ($staffs as $item)
                 <tr>
-                    <td>xxx</td>
-                    <td>0999999999</td>
-                    <td>xx</td>
-                    <td>xxxx</td>
-                    <td>พนักงาน</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->surname }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td>{{ $item->phonenumber }}</td>
+                    <td>{{ $item->getBranchOfUser()->branchs_name }}</td>
+                    <td>{{ $item->idcard }}</td>
                     <td>
                         <button>ลบ</button>
-                        <button>แก้ไข</button>
+                        <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>xxx</td>
-                    <td>0888888888</td>
-                    <td>xx</td>
-                    <td>xxxx</td>
-                    <td>พนักงาน</td>
-                    <td>
-                        <button>ลบ</button>
-                        <button>แก้ไข</button>
-                    </td>
-                </tr>
+                @empty
+
+                @endforelse
+
             </table>
             <center>
-                <button>เพิ่มพนักงาน</button>
+                <button type="button" data-toggle="modal" data-target="#myModal" style="width:20%">เพิ่มพนักงาน</button>
             </center>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog" style="color: black;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Staff</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('admin.adduser') }}" class="form-container" style="text-align: center;">
+                            <label for="username"><b>Username</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Username" name="username" required>
+                            <br>
+                            <label for="password"><b>Password</b></label>
+                            <br>
+                            <input type="password" placeholder="Enter Password" name="password" required>
+                            <br>
+                            <label for="email"><b>E-mail</b></label>
+                            <br>
+                            <input type="email" placeholder="Enter E-mail" name="email" required>
+                            <br>
+                            <label for="phone"><b>Phone number</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Phone Number" name="phonenumber" required>
+                            <br>
+                            <label for="name"><b>Name</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Name" name="name" required>
+                            <br>
+                            <label for="surname"><b>Surname</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Surname" name="surname" required>
+                            <br>
+                            <label for="branch"><b>Branch</b></label>
+                            <br>
+                            <select name="branch_id">
+                            @forelse ($branchs as $item)
+                            
+                                <option value="{{ $item->id }}">{{ $item->branchs_name }}</option>
+                            
+                            @empty
+                                
+                            @endforelse
+                         </select>
+                            <br>
+                            <label for="birthday"><b>Birthday</b></label>
+                            <br>
+                            <input type="date" placeholder="Enter Birthday" name="birthday" required>
+                            <br>
+                            <label for="address"><b>Address</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Address" name="address" required>
+                            <br>
+                            <label for="idcard"><b>IDcard</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter IDcard" name="idcard" required>
+                            <br>
+                            <label for="salary"><b>Salary</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Salary" name="salary" required>
+                            <br>
+                            <label for="salarytype"><b>Salary Type</b></label>
+                            <br>
+                            <select name="salary_type">
+                                <option value="Full time">Full time</option>
+                                <option value="Part time">Part time</option>
+
+                            </select>
+                            <br>
+                            <button type="submit" class="btn-success">Save</button>
+
+                            <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" role="dialog">
+            <div class="modal-dialog" style="color: black;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Staff</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('admin.adduser') }}" class="form-container" style="text-align: center;">
+                            <label for="username"><b>Username</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Username" name="username" required>
+                            <br>
+                            <label for="password"><b>Password</b></label>
+                            <br>
+                            <input type="password" placeholder="Enter Password" name="password" required>
+                            <br>
+                            <label for="email"><b>E-mail</b></label>
+                            <br>
+                            <input type="email" placeholder="Enter E-mail" name="email" required>
+                            <br>
+                            <label for="phone"><b>Phone number</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Phone Number" name="phonenumber" required>
+                            <br>
+                            <label for="name"><b>Name</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Name" name="name" required>
+                            <br>
+                            <label for="surname"><b>Surname</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Surname" name="surname" required>
+                            <br>
+                            <label for="branch"><b>Branch</b></label>
+                            <br>
+                            <select name="branch_id">
+                            @forelse ($branchs as $item)
+                            
+                                <option value="{{ $item->id }}">{{ $item->branchs_name }}</option>
+                            
+                            @empty
+                                
+                            @endforelse
+                         </select>
+                            <br>
+                            <label for="birthday"><b>Birthday</b></label>
+                            <br>
+                            <input type="date" placeholder="Enter Birthday" name="birthday" required>
+                            <br>
+                            <label for="address"><b>Address</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Address" name="address" required>
+                            <br>
+                            <label for="idcard"><b>IDcard</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter IDcard" name="idcard" required>
+                            <br>
+                            <label for="salary"><b>Salary</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Salary" name="salary" required>
+                            <br>
+                            <label for="salarytype"><b>Salary Type</b></label>
+                            <br>
+                            <select name="salary_type">
+                                <option value="Full time">Full time</option>
+                                <option value="Part time">Part time</option>
+
+                            </select>
+                            <br>
+                            <button type="submit" class="btn-success">Save</button>
+
+                            <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
+

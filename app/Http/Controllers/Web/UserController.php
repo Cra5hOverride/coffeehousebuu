@@ -15,6 +15,7 @@ class UserController extends Controller
         $data = $req->only($obj->getFillable());
         $obj->fill($data);
         $obj->password = Hash::make($req['password']);
+        $obj->position = 2;
         $obj->save();
         return response()->json($obj);
     }
@@ -43,11 +44,20 @@ class UserController extends Controller
     public function home(Request $req){
         $usr = $req->session()->get('login');
         if($usr->position == 0){
-            return view('pages.owner.homeowner');
+            return view('pages.owner.homeowner',[
+                "userlogin" => $usr,
+                "position" => "Founder"
+            ]);
         }else if($usr->position == 1){
-            return view('pages.manager.homemanager');
+            return view('pages.manager.homemanager',[
+                "userlogin" => $usr,
+                "position" => "Manager"
+            ]);
         }
-        return view('pages.staff.homecustomer');
+        return view('pages.staff.homecustomer',[
+                "userlogin" => $usr,
+                "position" => "Staff"
+        ]);
     }
 
     public function addManager(Request $req){
