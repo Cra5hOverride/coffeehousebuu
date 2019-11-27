@@ -48,6 +48,18 @@ class OwnerController extends Controller
         return redirect()->back();
     }
 
+    public function delBranchs($ID){
+        // dd($userID);
+        Branch::delBranch($ID);
+        return redirect()->back();
+    }
+
+    public function delVendors($ID){
+        // dd($userID);
+        Vendor::delVendor($ID);
+        return redirect()->back();
+    }
+
     public function updatePositionOfUser(Request $req){
         $userObj = User::selectById($req->userid);
         $userObj->branch_id = $req->branchid;
@@ -56,7 +68,35 @@ class OwnerController extends Controller
         return redirect()->route('admin.viewmanager');
     }
 
-    public function viewmanager(){
+    public function updateBranch(Request $req){
+        $obj = new Branch();
+        $data = $req->only($obj->getFillable());
+        $userObj = Branch::selectById($req->id);
+        $userObj->fill($data);
+        $userObj->save();
+        return redirect()->back();
+    }
+
+    public function updateStaff(Request $req){
+        $obj = new User();
+        $data = $req->only($obj->getFillable());
+        $userObj = User::selectById($req->id);
+        $userObj->fill($data);
+        $userObj->password = Hash::make($req['password']);
+        $userObj->save();
+        return redirect()->back();
+    }
+
+    public function updateVendor(Request $req){
+        $obj = new Vendor();
+        $data = $req->only($obj->getFillable());
+        $userObj = Vendor::selectById($req->id);
+        $userObj->fill($data);
+        $userObj->save();
+        return redirect()->back();
+    }
+
+    public function viewmanager(Request $req){
 
         $obj_managers = User::selectmenagers();
         $obj_staffs = User::selectstaffall();
@@ -69,7 +109,7 @@ class OwnerController extends Controller
         ]);
     }
 
-    public function viewstaff(){
+    public function viewstaff(Request $req){
         $obj_staffs = User::selectstaffall();
         $obj_branch = Branch::selectAll();
         return view('pages.owner.addstaff',[
@@ -78,7 +118,7 @@ class OwnerController extends Controller
         ]);
     }
     
-    public function viewbranch(){
+    public function viewbranch(Request $req){
         // dd('viewBranch');
         $obj_branch = Branch::selectAll();
         // dd($obj_branch);
@@ -87,18 +127,18 @@ class OwnerController extends Controller
         ]);
     }
 
-    public function viewdailystock(){
+    public function viewdailystock(Request $req){
         return view('pages.owner.dailystock');
     }
 
-    public function viewpartner(){
+    public function viewpartner(Request $req){
         $obj_vendors = Vendor::selectAll();
         return view('pages.owner.partner',[
             "vendors" => $obj_vendors
         ]);
     }
 
-    public function viewhome(){
+    public function viewhome(Request $req){
         $obj = $req->session()->get('login');
         return view('pages.owner.homeowner',[
             "userlogin" => $obj,

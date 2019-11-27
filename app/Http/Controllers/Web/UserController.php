@@ -24,13 +24,13 @@ class UserController extends Controller
         $obj = User::Where('username', $req['username']);
         $usr;
         if($obj->count() < 1){
-            return "ไม่มีผู้ใช้งานในระบบ";
+            return redirect()->back() ->with('alert', 'ไม่มีผู้ใช้งานในระบบ!');
         }else{
             $usr = $obj->first();
             if (Hash::check($req['password'], $usr->password)){
                 $req->session()->put('login', $usr);
             }else{
-                return "รหัสผ่านไม่ถูกต้อง";
+                return redirect()->back() ->with('alert', 'รหัสผ่านไม่ถูกต้อง!');
             }
         }
         return redirect()->route('home');

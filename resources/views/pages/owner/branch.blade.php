@@ -53,8 +53,8 @@
                         <td>{{ $item->email }}</td>
 
                         <td>
-                            <button>ลบ</button>
-                            <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button>
+                            <a href="{{ route('admin.delbranch', ["id" => $item->id]) }}"><button>ลบ</button></a>
+                        <button type="button" data-toggle="modal" data-target="#editModal{{$item->id}}">แก้ไข</button>
                         </td>
                     </tr>
                 @empty
@@ -102,41 +102,46 @@
         </div>
 
 
+@forelse ($branchs as $item)
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal{{$item->id}}" role="dialog">
+        <div class="modal-dialog" style="color: black;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Branch</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.updatebranch') }}" class="form-container" style="text-align: center;">
 
-        <!-- Edit Modal -->
-        <div class="modal fade" id="editModal" role="dialog">
-            <div class="modal-dialog" style="color: black;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Branch</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('admin.addbranch') }}" class="form-container" style="text-align: center;">
+                        <input type="text"  name="id" value="{{$item->id}}" hidden>
+                        <label for="name"><b>Name</b></label>
+                        <br>
+                        <input type="text" placeholder="Enter Name" name="branchs_name" value="{{$item->branchs_name}}" required>
+                        <br>
+                        <label for="address"><b>Address</b></label>
+                        <br>
+                        <input type="text" placeholder="Enter Address" name="address" value="{{$item->address}}" required>
+                        <br>
+                        <label for="phone"><b>Phone Number</b></label>
+                        <br>
+                        <input type="text" placeholder="Enter Phone Number" name="phonenumber" value="{{$item->phonenumber}}" required>
+                        <br>
+                        <label for="email"><b>Email</b></label>
+                        <br>
+                        <input type="email" placeholder="Enter Email" name="email" value="{{$item->email}}" required>
+                        <br>
+                        <button type="submit" class="btn-success">Save</button>
 
-                            <label for="name"><b>Name</b></label>
-                            <br>
-                            <input type="text" placeholder="Enter Name" name="branchs_name" required>
-                            <br>
-                            <label for="address"><b>Address</b></label>
-                            <br>
-                            <input type="text" placeholder="Enter Address" name="address" required>
-                            <br>
-                            <label for="phone"><b>Phone Number</b></label>
-                            <br>
-                            <input type="text" placeholder="Enter Phone Number" name="phonenumber" required>
-                            <br>
-                            <label for="email"><b>Email</b></label>
-                            <br>
-                            <input type="email" placeholder="Enter Email" name="email" required>
-                            <br>
-                            <button type="submit" class="btn-success">Save</button>
-
-                            <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
-                        </form>
-                    </div>
+                        <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+@empty
+    
+@endforelse
+        
 
 
     </div>

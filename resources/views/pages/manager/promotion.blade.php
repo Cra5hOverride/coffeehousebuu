@@ -40,16 +40,21 @@
                     <th>วันสิ้นสุดโปรโมชั่น</th>
                     <th>ตัวเลือก</th>
                 </tr>
+                @forelse ($promotion as $item)
                 <tr>
-                    <td>20</td>
-                    <td>xx-xx-xx</td>
-                    <td>xx-xx-xx</td>
-
-                    <td>
-                        <button>ลบ</button>
-                        <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button>
-                    </td>
-                </tr>
+                <td>{{$item->promotions_detail}}</td>
+                <td>{{$item->start}}</td>
+                <td>{{$item->end}}</td>
+    
+                        <td>
+                            <button>ลบ</button>
+                            {{-- <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button> --}}
+                        </td>
+                    </tr>
+                @empty
+                    
+                @endforelse
+                
             </table>
             <center>
                 <button type="button" data-toggle="modal" data-target="#myModal" style="width:20%">เพิ่มโปรโมชั่น</button>
@@ -65,12 +70,12 @@
                         <h4 class="modal-title">Promotion</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="" class="form-container" style="text-align: center;">
+                    <form action="{{route('manager.addPromotion')}}" class="form-container" style="text-align: center;">
 
 
                             <label for="dis"><b>Discount</b></label>
                             <br>
-                            <input type="number" placeholder="Enter Discount" name="dis" required>
+                            <input type="number" placeholder="Enter Discount" name="promotions_detail" required>
                             <br>
                             <label for="start"><b>Dete Start</b></label>
                             <br>

@@ -55,7 +55,7 @@
                     <td>{{ $item->getBranchOfUser()->branchs_name }}</td>
                     <td>{{ $item->idcard }}</td>
                     <td>
-                        <button>ลบ</button>
+                        <a href="{{ route('admin.delstaff', ["id" => $item->id]) }}"><button>ลบ</button></a>
                     <button type="button" data-toggle="modal" data-target="#editModal{{$item->id}}">แก้ไข</button>
                     </td>
                 </tr>
@@ -155,14 +155,15 @@
                         <h4 class="modal-title">Edit Staff</h4>
                     </div>
                     <div class="modal-body">
-                    <form action="" class="form-container" style="text-align: center;">
+                    <form action="{{route('admin.updatestaff')}}" class="form-container" style="text-align: center;">
+                            <input type="text" name="id" value="{{$item->id}}" hidden>
                             <label for="username"><b>Username</b></label>
                             <br>
-                        <input type="text" placeholder="Enter Username" name="username" value="{{$item->username}}" required>
+                            <input type="text" placeholder="Enter Username" name="username" value="{{$item->username}}" required>
                             <br>
                             <label for="password"><b>Password</b></label>
                             <br>
-                            <input type="password" placeholder="Enter Password" name="password" value="{{$item->password}}" required>
+                            <input type="password" placeholder="Enter Password" name="password" required>
                             <br>
                             <label for="email"><b>E-mail</b></label>
                             <br>
@@ -183,9 +184,9 @@
                             <label for="branch"><b>Branch</b></label>
                             <br>
                             <select name="branch_id">
-                                    @forelse ($branchs as $item)
+                                    @forelse ($branchs as $ditem)
                             
-                                    <option value="{{ $item->id }}">{{ $item->branchs_name }}</option>
+                                    <option value="{{ $ditem->id }}">{{ $ditem->branchs_name }}</option>
                                 
                                 @empty
                                     

@@ -35,22 +35,27 @@
         <div>
             <table style="width:100%;text-align: center; margin-top:30px">
                 <tr>
-                    <th>ชื่อ</th>
-                    <th>ตำแหน่ง</th>
+                    <th>ชื่อ-นามสกุล</th>
+                    {{-- <th></th> --}}
                     <th>วันที่เริ่มการลา</th>
                     <th>วันที่สิ้นสุดการลา</th>
-                    <th>ตัวเลือก</th>
+                    {{-- <th>ตัวเลือก</th> --}}
                 </tr>
+                @forelse ($TL as $item)
                 <tr>
-                    <td>xxx</td>
-                    <td>xxxxxxxxxxx</td>
-                    <td>xx-xx-xx</td>
-                    <td>xx-xx-xx</td>
-           
-                    <td>
-                        <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button>
-                    </td>
-                </tr>
+                        <td>{{$item->getUserOfTL()->name}} {{$item->getUserOfTL()->surname}}</td>
+                        {{-- <td></td> --}}
+                        <td>{{$item->start}}</td>
+                        <td>{{$item->end}}</td>
+               
+                        {{-- <td>
+                            <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button>
+                        </td> --}}
+                    </tr>
+                @empty
+                    
+                @endforelse
+                
              
             </table>
             <center>
@@ -66,15 +71,17 @@
                         <h4 class="modal-title">Takeleave</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="" class="form-container" style="text-align: center;">
+                    <form action="{{route('manager.addTakeleave')}}" class="form-container" style="text-align: center;">
 
                             <label for="name"><b>Name</b></label>
                             <br>
-                            <select>
-                                <option value="name1">สมถุย สลายดาว</option>
-                                <option value="name2">โจ้ กาก</option>
+                            <select name="user_id">
+                                @forelse ($staff as $item)
+                            <option value="{{$item->id}}">{{$item->name}} {{$item->surname}}</option>
+                                @empty
+                                @endforelse
                             </select>
-                            </br>
+                            <br>
                             <label for="start"><b>Dete Start</b></label>
                             <br>
                             <input type="date" placeholder="Enter Date" name="start" required>
@@ -108,7 +115,7 @@
                                 <option value="name1">สมถุย สลายดาว</option>
                                 <option value="name2">โจ้ กาก</option>
                             </select>
-                            </br>
+                            <br>
                             <label for="start"><b>Dete Start</b></label>
                             <br>
                             <input type="date" placeholder="Enter Date" name="start" required>

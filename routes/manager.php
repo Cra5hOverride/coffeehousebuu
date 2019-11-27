@@ -1,6 +1,9 @@
 <?php
 
 Route::group(['prefix' => 'manager', 'middleware' => ['login']], function(){
+    Route::get('/addtakeleave', 'Web\ManagerController@addTakeleave')->name('manager.addTakeleave');
+    Route::get('/addpromotion', 'Web\ManagerController@addPromotion')->name('manager.addPromotion');
+    Route::get('/addvendor', 'Web\ManagerController@addVendor')->name('manager.addVendor');
     Route::get('/adduser', 'Web\ManagerController@addUser')->name('manager.addUser');
     Route::get('/dailystock', 'Web\ManagerController@viewDailystock')->name('manager.viewDailystock');
     Route::get('/addstaff', 'Web\ManagerController@viewAddstaff')->name('manager.viewAddstaff');

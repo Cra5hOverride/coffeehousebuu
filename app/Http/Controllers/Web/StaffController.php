@@ -19,43 +19,47 @@ class StaffController extends Controller
         return redirect()->back();
     }
 
-    public function viewcustomer(){
+    public function viewcustomer(Request $req){
         return view('pages.staff.addcustomer');
     }
 
-    public function viewmenu(){
+    public function viewmenu(Request $req){
         return view('pages.staff.addmenu');
     }
 
-    public function viewpromotion(){
+    public function viewpromotion(Request $req){
         return view('pages.staff.addpromotion');
     }
 
-    public function viewbill(){
+    public function viewbill(Request $req){
         return view('pages.staff.bill');
     }
 
-    public function viewclaim(){
+    public function viewclaim(Request $req){
         return view('pages.staff.claim');
     }
 
-    public function vieworderproduct(){
+    public function vieworderproduct(Request $req){
         return view('pages.staff.orderproduct');
     }
 
-    public function viewreceiveclaim(){
+    public function viewreceiveclaim(Request $req){
         return view('pages.staff.receiveclaim');
     }
 
-    public function viewreceiveproduct(){
+    public function viewreceiveproduct(Request $req){
         return view('pages.staff.receiveproduct');
     }
 
-    public function viewshowstock(){
+    public function viewshowstock(Request $req){
         return view('pages.staff.showstock');
     }
 
-    public function viewhome(){
-        return view('pages.staff.homecustomer');
+    public function viewhome(Request $req){
+        $obj = $req->session()->get('login');
+        return view('pages.staff.homecustomer',[
+            "userlogin" => $obj,
+            "position" => "Staff"
+        ]);
     }
 }

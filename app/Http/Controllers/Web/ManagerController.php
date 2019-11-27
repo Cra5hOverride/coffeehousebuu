@@ -45,6 +45,23 @@ class ManagerController extends Controller
         return redirect()->back();
     }
 
+    public function addVendor(Request $req){
+        $obj = new Vendor();
+        $data = $req->only($obj->getFillable());
+        $obj->fill($data);
+        $obj->status = 1;
+        $obj->save();
+        return redirect()->back();
+    }
+
+    public function addTakeleave(Request $req){
+        $obj = new Take_leave();
+        $data = $req->only($obj->getFillable());
+        $obj->fill($data);
+        $obj->save();
+        return redirect()->back();
+    }
+
     public function viewDailystock(Request $req){
         return view('pages.manager.dailystock');
     }
@@ -101,11 +118,21 @@ class ManagerController extends Controller
 
      
     public function viewTakeleave(Request $req){
-        return view('pages.manager.takeleave');
+        $obj = $req->session()->get('login');
+        $staff = User::all()
+                      ->Where('position', 2)
+                      ->Where('branch_id',$obj->branch_id);
+                      
+        $obj_TL = Take_leave::getTakeleave($staff);
+        return view('pages.manager.takeleave',[
+            "TL" => $obj_TL,
+            "staff" => $staff
+        ]);
     }
 
     public function viewVendor(Request $req){
         $obj_vendors = Vendor::selectAll();
+
         return view('pages.manager.vendor',[
             "vendors" => $obj_vendors
         ]);
@@ -116,9 +143,15 @@ class ManagerController extends Controller
         return view('pages.manager.work');
     }
 
-    public function viewshowstock(){
+    public function viewshowstock(Request $req){
+        $obj = $req->session()->get('login');
+        $obj_branch = Branch::all()->Where('id',$obj->branch_id);
+        $vendor = Vendor::all();
         
-        return view('pages.manager.showstock');
+        return view('pages.manager.showstock',[
+            "branch" => $obj_branch,
+            "vendor" => $vendor
+        ]);
     }
 
 }

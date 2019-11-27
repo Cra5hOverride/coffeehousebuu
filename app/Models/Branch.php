@@ -45,5 +45,11 @@ class Branch extends Model
         return $result;
     }
 
+    public static function delBranch($ID){
+        return self::Where('id', $ID)->delete();
+    }
+    public static function selectById($id){
+        return self::Where('id', $id)->first();
+    }
     
 }

@@ -73,15 +73,22 @@
                             <label for="vendor"><b>Vendor</b></label>
                             <br>
                             <select>
-                                <option value="vendor1">คุณชะโบ</option>
-                                <option value="vendor2">เพื่อนคุณชะโบ</option>
+                                @forelse ($vendor as $item)
+                            <option value="{{$item->id}}">{{$item->store_name}}</option>
+                                @empty
+                                    
+                                @endforelse
+                                
                             </select>
                             <br>
                             <label for="branch"><b>Branch</b></label>
                             <br>
                             <select>
-                                <option value="branch1">โจ้โจ้สาขา1</option>
-                                <option value="branch2">ไอปลั๊กสาขา1</option>
+                                @forelse ($branch as $item)
+                            <option value="{{$item->id}}">{{$item->branchs_name}}</option>
+                                @empty
+                                    
+                                @endforelse
                             </select>
                             <br>
                             <label for="price"><b>Price</b></label>
