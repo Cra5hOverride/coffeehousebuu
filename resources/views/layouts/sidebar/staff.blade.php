@@ -25,11 +25,11 @@
             <p>รับสินค้า-วัตถุดิบ</p>
         </a>
         <a href="{{ route('staff.viewclaim') }}" class="w3-bar-item w3-button w3-padding-large perthSelectMenu_4">
-            <i class="fa fa-exchange w3-xxlarge"></i>
+            <i class="fa fa-truck w3-xxlarge"></i>
             <p>เคลม</p>
         </a>
         <a href="{{ route('staff.viewreceiveclaim') }}" class="w3-bar-item w3-button w3-padding-large perthSelectMenu_7">
-            <i class="fa fa-exchange w3-xxlarge"></i>
+            <i class="fa fa-asl-interpreting w3-xxlarge"></i>
             <p>รับของเคลม</p>
         </a>
         <a href="{{ route('logout') }}" class="w3-bar-item w3-button w3-padding-large perthSelectMenu_5" >

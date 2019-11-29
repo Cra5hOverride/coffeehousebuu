@@ -14,11 +14,23 @@ class Branch_product extends Model
     protected $fillable = [
         'product_id',
         'branch_id',
-        'qty',
-        'date_receive'
+        'qty'
     ];
 
     public static function selectAll(){
         return self::all();
+    }
+
+    public static function selectById($id){
+        return self::Where('id', $id)->first();
+    }
+
+    public static function delById($ID){
+        return self::Where('id', $ID)->delete();
+    }
+
+    public function getProductOfBranch(){
+        return Product::where('id', $this->product_id)
+                    ->first();
     }
 }

@@ -10,7 +10,7 @@
             margin: 8px 0;
             border: none;
             cursor: pointer;
-            width: 20%;
+            width: 40%;
         }
     
         th {
@@ -39,20 +39,30 @@
                 <th>คู่ค้า</th>
                 <th>จำนวนทั้งหมด</th>
                 <th>หน่วย</th>
+                <th>ตัวเลือก</th>
 
             </tr>
+            @forelse ($VP as $item)
             <tr>
-                <td>0000</td>
-                <td>nnnnnn</td>
-                <td>สมชาย</td>
-                <td>500</td>
-                <td>ชิ้น</td>
+                <td>{{$item->getProductOfVP()->id}}</td>
+                <td>{{$item->getProductOfVP()->product_name}}</td>
+                <td>{{$item->getVerdorOfVP()->store_name}}</td>
+                <td>{{$item->getBPOfVP()->qty}}</td>
+                <td>{{$item->product_unit}}</td>
+                <td>
+                    <a href="{{ route('manager.delVP', ["id" => $item->id]) }}"><button>ลบ</button></a>
+                    {{-- <button type="button" data-toggle="modal" data-target="#editModal{{$item->id}}">แก้ไข</button> --}}
+                </td>
             </tr>
+            @empty
+                
+            @endforelse
+            
         </table>
 
 
         <center>
-            <button type="button" data-toggle="modal" data-target="#myModal">เพิ่มสินค้า</button>
+            <button type="button" data-toggle="modal" data-target="#myModal" style="width:20%;">เพิ่มสินค้า</button>
         </center>
     </div>
 
@@ -65,27 +75,27 @@
                         <h4 class="modal-title">Product</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="" class="form-container" style="text-align: center;">
+                    <form action="{{route('manager.addStock')}}" class="form-container" style="text-align: center;">
                             <label for="name"><b>Name Product</b></label>
                             <br>
-                            <input type="text" placeholder="Enter Name" name="name" required>
+                            <input type="text" placeholder="Enter Name" name="product_name" required>
                             <br>
                             <label for="vendor"><b>Vendor</b></label>
                             <br>
-                            <select>
-                                @forelse ($vendor as $item)
-                            <option value="{{$item->id}}">{{$item->store_name}}</option>
+                            <select name="vendor_id">
+                                @forelse ($vendor as $vitem)
+                            <option value="{{$vitem->id}}">{{$vitem->store_name}}</option>
                                 @empty
                                     
                                 @endforelse
                                 
-                            </select>
+                            </select >
                             <br>
                             <label for="branch"><b>Branch</b></label>
                             <br>
-                            <select>
-                                @forelse ($branch as $item)
-                            <option value="{{$item->id}}">{{$item->branchs_name}}</option>
+                            <select name="branch_id">
+                                @forelse ($branch as $bitem)
+                            <option value="{{$bitem->id}}">{{$bitem->branchs_name}}</option>
                                 @empty
                                     
                                 @endforelse
@@ -107,4 +117,42 @@
                 </div>
             </div>
         </div>
+
+        @forelse ($VP as $item)
+            <!-- Edit Modal -->
+    <div class="modal fade" id="editModal{{$item->id}}" role="dialog">
+                <div class="modal-dialog" style="color: black;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Product</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form action="" class="form-container" style="text-align: center;">
+
+                                <input type="text"  name="id" value="{{$item->id}}" hidden>
+                                <input type="text"  name="product_id" value="{{$item->product_id}}" hidden>
+                                <label for="name"><b>Name Product</b></label>
+                                <br>
+                                <input type="text" placeholder="Enter Name" name="product_name" value="{{$item->getProductOfVP()->product_name}}" required>
+                                <br>
+                                <label for="price"><b>Price</b></label>
+                                <br>
+                                <input type="text" placeholder="Enter Price" name="price" value="{{$item->product_prices}}" required>
+                                <br>
+                                <label for="unit"><b>Unit</b></label>
+                                <br>
+                                <input type="text" placeholder="Enter Unit" name="unit" value="{{$item->product_unit}}" required>
+                                <br>
+                                <button type="submit" class="btn-success">Save</button>
+        
+                                <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
+            
+        @endforelse
+        
 @endsection

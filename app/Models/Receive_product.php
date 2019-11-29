@@ -21,4 +21,10 @@ class Receive_product extends Model
     public static function selectAll(){
         return self::all();
     }
+
+    public static function getOrderProduct($id){
+        return self::Join('order_has_products', 'receive_products.order_product_id', 
+                    'order_has_products.order_product_id')
+                    ->Where('receive_products.order_product_id', $id)->get();
+    }
 }

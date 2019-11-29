@@ -32,70 +32,44 @@
             <h1 class="w3-jumbo">เงินเดือน</h1>
 
         </header>
-        <div>
+        <div style="margin-left: 50px;">
             <table style="width:100%;text-align: center;margin-top:30px">
 
                 <tr>
-                    <th>ชื่อ</th>
-                    <th>นามสกุล</th>
+                    <th>ชื่อ - นามสกุล</th>
                     <th>เบอร์โทรศัพท์</th>
                     <th>อีเมล</th>
                     <th>สาขา</th>
                     <th>สถานะ</th>
+                    <th >ตัวเลือก</th>
                 </tr>
+                @forelse ($staff as $item)
                 <tr>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>0999999999</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
+                    <td>{{$item->name}}  {{$item->surname}}</td>
+                    <td>{{$item->phonenumber}}</td>
+                    <td>{{$item->email}}</td>
+                    <td>{{$item->getBranchOfUser()->branchs_name}}</td>
+                    <td>{{$item->getSalaryOfUser()}}</td>
+                    <td>
+                        <a href="{{ route('manager.addSalary', ["id" => $item->id]) }}">
+                        <button type="button" class="btn-success" style="width:50%;">จ่ายเงินเดือน</button>
+                        </a>
+                    </td>
                 </tr>
-                <tr>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>0999999999</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                </tr>
+                @empty
+                    
+                @endforelse
+               
             </table>
         </div>
 
-        <center>
-            <button type="button" data-toggle="modal" data-target="#myModal" style="margin-top:30px">เพิ่มการจ่ายเงินเดือน</button>
-        </center>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog" style="color: black;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Salary</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" class="form-container" style="text-align: center;">
-
-                            <label for="name"><b>Name</b></label>
-                            <br>
-                            <select>
-                                <option value="name1">สมถุย สลายดาว</option>
-                                <option value="name2">โจ้ กาก</option>
-                            </select>
-                            <br>
-                            <label for="status"><b>Status</b></label>
-                            <br>
-                            <select>
-                                <option value="name1">ยัง</option>
-                                <option value="name2">รับแล้ว</option>
-                            </select>
-                            <br>
-                            <button type="submit" class="btn-success">Save</button>
-
-                            <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        
 @endsection
+
+<script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+          alert(msg);
+        }
+      </script>

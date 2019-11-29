@@ -31,14 +31,7 @@
 
     </header>
     <div>
-        <div style="width:100%;text-align: center;margin-top:30px">
-            <form action="">
-                วันที่ : <input type="date" name="bday" style="color: black;">
-                <button type="submit">ค้นหา</button>
-            </form>
-            <br>
-        </div>
-        <table style="width:100%;text-align: center;">
+        <table style="width:100%;text-align: center; margin-top:30px;">
             <tr>
                 <th style="width:20%;">วันที่ XX/XX/XXXX</th>
                 <th>รายละเอียด</th>

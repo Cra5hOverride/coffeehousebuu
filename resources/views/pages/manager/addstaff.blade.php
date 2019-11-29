@@ -132,8 +132,8 @@
                         <label for="salaryunit"><b>Salary Type</b></label>
                         <br>
                         <select name="salary_type">
-                            <option value="volvo">Full time</option>
-                            <option value="saab">Part time</option>
+                            <option value="Full time">Full time</option>
+                            <option value="Part time">Part time</option>
 
                         </select>
                         <br>

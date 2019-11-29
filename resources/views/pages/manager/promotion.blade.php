@@ -35,6 +35,7 @@
         <div>
             <table style="width:100%;text-align: center;margin-top:30px">
                 <tr>
+                    <th>รหัสโปรโมชั่น</th>
                     <th>ส่วนลด</th>
                     <th>วันที่เริ่มโปรชั่น</th>
                     <th>วันสิ้นสุดโปรโมชั่น</th>
@@ -42,6 +43,7 @@
                 </tr>
                 @forelse ($promotion as $item)
                 <tr>
+                <td>{{$item->id}}</td>
                 <td>{{$item->promotions_detail}}</td>
                 <td>{{$item->start}}</td>
                 <td>{{$item->end}}</td>

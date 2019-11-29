@@ -39,7 +39,7 @@
                 <th>ที่อยู่</th>
                 <th>เบอร์โทรศัพท์</th>
                 <th>อีเมล</th>
-                <th>สถานะ</th>
+                <th>ชื่อคนติดต่อ</th>
                 <th>ตัวเลือก</th>
             </tr>
             @forelse ($vendors as $item)

@@ -97,9 +97,7 @@
 
                 <label for="address"><b>ที่อยู่</b></label>
                 <input type="text" placeholder="ที่อยู่" name="address" required>
-
             </div>
-           
                 <button type="submit" class="btn-success">ยืนยัน</button>
             </form>
         </center>

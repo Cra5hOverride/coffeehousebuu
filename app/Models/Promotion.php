@@ -20,4 +20,12 @@ class Promotion extends Model
     public static function selectAll(){
         return self::all();
     }
+
+    public static function selectById($id){
+        return self::Where('id', $id)->first();
+    }
+
+    public static function delById($ID){
+        return self::Where('id', $ID)->delete();
+    }
 }

@@ -10,7 +10,7 @@
             margin: 8px 0;
             border: none;
             cursor: pointer;
-            width: 20%;
+            width: 40%;
         }
     
         th {
@@ -38,19 +38,23 @@
                 <th>ชื่อ</th>
                 <th>จำนวนทั้งหมด</th>
                 <th>หน่วย</th>
-
+                <th>ตัวเลือก</th>
             </tr>
             <tr>
                 <td>0000</td>
                 <td>nnnnnn</td>
                 <td>500</td>
                 <td>ชิ้น</td>
+                <td>
+                    <button>ลบ</button>
+                    <!-- <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button> -->
+                </td>
             </tr>
         </table>
 
 
         <center>
-            <button type="button" data-toggle="modal" data-target="#myModal">เพิ่มสินค้า</button>
+            <button type="button" data-toggle="modal" data-target="#myModal" style="width:20%">เพิ่มสินค้า</button>
         </center>
     </div>
 
@@ -81,6 +85,36 @@
                                 <option value="branch1">โจ้โจ้สาขา1</option>
                                 <option value="branch2">ไอปลั๊กสาขา1</option>
                             </select>
+                            <br>
+                            <label for="price"><b>Price</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Price" name="price" required>
+                            <br>
+                            <label for="unit"><b>Unit</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Unit" name="unit" required>
+                            <br>
+                            <button type="submit" class="btn-success">Save</button>
+    
+                            <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+           <!-- Edit Modal -->
+           <div class="modal fade" id="editModal" role="dialog">
+            <div class="modal-dialog" style="color: black;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Product</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="form-container" style="text-align: center;">
+                            <label for="name"><b>Name Product</b></label>
+                            <br>
+                            <input type="text" placeholder="Enter Name" name="name" required>
                             <br>
                             <label for="price"><b>Price</b></label>
                             <br>

@@ -32,11 +32,10 @@
             <h1 class="w3-jumbo">ประวัติการลางาน</h1>
 
         </header>
-        <div>
+        <div >
             <table style="width:100%;text-align: center; margin-top:30px">
                 <tr>
-                    <th>ชื่อ-นามสกุล</th>
-                    {{-- <th></th> --}}
+                    <th>ชื่อ - นามสกุล</th>
                     <th>วันที่เริ่มการลา</th>
                     <th>วันที่สิ้นสุดการลา</th>
                     {{-- <th>ตัวเลือก</th> --}}
@@ -44,7 +43,6 @@
                 @forelse ($TL as $item)
                 <tr>
                         <td>{{$item->getUserOfTL()->name}} {{$item->getUserOfTL()->surname}}</td>
-                        {{-- <td></td> --}}
                         <td>{{$item->start}}</td>
                         <td>{{$item->end}}</td>
                

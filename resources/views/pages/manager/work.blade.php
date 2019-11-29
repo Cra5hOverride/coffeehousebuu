@@ -32,68 +32,51 @@
             <h1 class="w3-jumbo">เข้างาน</h1>
 
         </header>
-        <div>
+        <div style="margin-left: 50px;">
             <table style="width:100%;text-align: center;margin-top:30px">
 
                 <tr>
-                    <th>ชื่อ</th>
-                    <th>นามสกุล</th>
+                    <th>ชื่อ - นามสกุล</th>
                     <th>เบอร์โทรศัพท์</th>
                     <th>อีเมล</th>
+                    <th>ตำแหน่ง</th>
                     <th>สาขา</th>
-                    <th>เริ่มทำงาน</th>
-                    <th>เลิกงาน</th>
+                    <th>สถานะ</th>
+                    <!-- <th>เลิกงาน</th> -->
+                    <th>ตัวเลือก</th>
                 </tr>
+                @forelse ($staff as $item)
                 <tr>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>0999999999</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
+                    <td>{{$item->name}}  {{$item->surname}}</td>
+                    <td>{{$item->phonenumber}}</td>
+                    <td>{{$item->email}}</td>
+                    <td>{{$item->getPositionOfUser($item->id)}}</td>
+                    <td>{{$item->getBranchOfUser()->branchs_name}}</td>
+                    <td>{{$item->getAttendOfUser()->work}}</td>
+                    <!-- <td>xxxx</td> -->
+                    <td>
+                        <a href="{{ route('manager.addAttend', ["id" => $item->id]) }}">
+                            <button type="button" class="btn-success" style="width:70%;">บันทึกเวลาเข้างาน</button>
+                        </a>
+                        
+                    </td>
                 </tr>
+                @empty
+                    
+                @endforelse
+                
              
             </table>
         </div>
 
-        <center>
-            <button type="button" data-toggle="modal" data-target="#myModal" style="margin-top:30px">เพิ่มการเข้างาน</button>
-        </center>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog" style="color: black;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Time Work</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" class="form-container" style="text-align: center;">
-                            <label for="name"><b>Name</b></label>
-                            <br>
-                            <select>
-                                <option value="name1">สมถุย สลายดาว</option>
-                                <option value="name2">โจ้ กาก</option>
-                            </select>
-                            <br>
-                            <label for="start-time"><b>Start time</b></label>
-                            <br>
-                            <input type="datetime-local" placeholder="Enter Start time" name="start-time" required>
-                            <br>
-                            <label for="end-time"><b>End time</b></label>
-                            <br>
-                            <input type="datetime-local" placeholder="Enter End time" name="end-time" required>
-                            <br>
-                            <button type="submit" class="btn-success">Save</button>
-
-                            <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
 
     </div>
 @endsection
+
+<script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+          alert(msg);
+        }
+      </script>

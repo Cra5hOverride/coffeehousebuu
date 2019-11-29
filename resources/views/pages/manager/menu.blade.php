@@ -37,20 +37,23 @@
             <tr>
                 <th>ชื่อ</th>
                 <th>ราคา</th>
-                <th>ราบละเอียด</th>
                 <th>สถานะ</th>
                 <th>ตัวเลือก</th>
             </tr>
+            @forelse ($menu as $item)
             <tr>
-                <td>xxx</td>
-                <td>1000000</td>
-                <td>xxxxxxxxxx</td>
-                <td>มี</td>
-                <td>
-                    <button>ลบ</button>
-                    <button type="button" data-toggle="modal" data-target="#editModal">แก้ไข</button>
-                </td>
-            </tr>
+                    <td>{{$item->menus_name}}</td>
+                    <td>{{$item->prices}}</td>
+                    <td>{{$item->StatusById($item->id)}}</td>
+                    <td>
+                            <a href="{{ route('manager.delMenu', ["id" => $item->id]) }}"><button>ลบ</button></a>
+                    </td>
+    
+                </tr>
+            @empty
+                
+            @endforelse
+            
            
         </table>
         <center>
@@ -67,6 +70,7 @@
                     <h4 class="modal-title">Menu</h4>
                 </div>
                 <div class="modal-body">
+                <form action="{{route('manager.addMenu')}}" class="form-container" style="text-align: center;">
                 <div>
                     <center>
                     <label for="product"><b>Product</b></label>
@@ -74,26 +78,27 @@
                             <tr>
                                  <th>สินค้า/วัตถุดิบ</th>
                                  <th>จำนวน</th>
+                                 <th>ตัวเลือก</th>
                             </tr>
-                             <tr>
-                                 <td>
-                                   <select>
-                                       <option value="product1">เค้ก</option>
-                                       <option value="product2">กาแฟต้ม</option>
-                                     </select>
-                                  </td>
-                                 <td>
-                                     <input type="number">
-                                 </td>
-                             </tr>
                           </table>
                           <br>
-                          <button onclick="myCreateFunction()">เพิ่ม</button>
-                          <button onclick="myDeleteFunction()">ลบ</button>
+                          <select id="product_name"> 
+
+                                @forelse ($BP as $item)
+  
+                                <option value="{{$item->getProductOfBranch()->product_name}}">{{$item->getProductOfBranch()->product_name}}</option>
+                                
+                                @empty
+  
+                                @endforelse
+  
+                             </select>
+                             <input id="product_qty" type="number" >
+                             <br>
+                          <button type="button" onclick="myCreateFunction()">เพิ่ม</button>
+                          {{-- <button type="button" onclick="myDeleteFunction()">ลบ</button> --}}
                     </center>
                 </div>
-                    <form action="" class="form-container" style="text-align: center;">
-
                         <label for="menu"><b>Menu Name</b></label>
                         <br>
                         <input type="text" placeholder="Enter Menu Name" name="menu" required>
@@ -119,6 +124,7 @@
                     <h4 class="modal-title">Edit Menu</h4>
                 </div>
                 <div class="modal-body">
+                <form action="" class="form-container" style="text-align: center;">
                 <div>
                     <center>
                     <label for="product"><b>Product</b></label>
@@ -127,24 +133,14 @@
                                  <th>สินค้า/วัตถุดิบ</th>
                                  <th>จำนวน</th>
                             </tr>
-                             <tr>
-                                 <td>
-                                   <select>
-                                       <option value="product1">เค้ก</option>
-                                       <option value="product2">กาแฟต้ม</option>
-                                     </select>
-                                  </td>
-                                 <td>
-                                     <input type="number">
-                                 </td>
-                             </tr>
+                             
                           </table>
                           <br>
-                          <button onclick="myCreateFunction()">เพิ่ม</button>
-                          <button onclick="myDeleteFunction()">ลบ</button>
+                          <button type="button" onclick="myCreateFunction()">เพิ่ม</button>
+                          <button type="button" onclick="myDeleteFunction()">ลบ</button>
                     </center>
                 </div>
-                    <form action="" class="form-container" style="text-align: center;">
+                    
 
                         <label for="menu"><b>Menu Name</b></label>
                         <br>
@@ -163,7 +159,6 @@
                         <br>
 
 
-
                         <button type="submit" class="btn-success">Save</button>
                         <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
                     </form>
@@ -175,18 +170,47 @@
 </div>
 @endsection
 
-<script>
-function myCreateFunction() {
-  var table = document.getElementById("myTable");
-  var row = table.insertRow(1);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
+@section('js')
+    <script>
 
-  cell1.innerHTML = '<select> <option value="product1" >เค้ก</option> <option value="product2">กาแฟต้ม</option></select>';
+        function myCreateFunction() {
 
-  cell2.innerHTML = '<input type="number">';
-}
-function myDeleteFunction() {
-  document.getElementById("myTable").deleteRow(1);
-}
-</script>
+            var name = document.getElementById("product_name");
+            var qty = document.getElementById("product_qty");
+
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            if (name.value != "" && qty.value != "") {
+
+            
+            // cell1.innerHTML = name.value;
+            // cell2.innerHTML = qty.value;
+            cell1.innerHTML = name.value+'<input type="hidden" name="product_name[]" value="' + name.value + '">';
+            cell2.innerHTML = qty.value+'<input type="hidden" name="product_qty[]" value="' + qty.value + '">';
+            cell3.innerHTML ='<button type="button" value="Delete" onclick="deleteRow(this)">ลบ</button>';
+
+
+            }
+
+            name.value="";
+            qty.value="";
+
+
+        }
+
+        function myDeleteFunction() {
+        document.getElementById("myTable").deleteRow(1);
+        }
+
+        function deleteRow(row) {
+            var d = row.parentNode.parentNode.rowIndex;
+            document.getElementById('myTable').deleteRow(d);
+
+        }
+
+    </script>
+@endsection

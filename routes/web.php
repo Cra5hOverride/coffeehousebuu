@@ -17,7 +17,7 @@ Route::get('/home', 'Web\UserController@home')->middleware('login')->name('home'
 
 Route::get('/', function () {
     return view('pages.login.login');
-})->name('welcome');
+})->middleware('nologin')->name('welcome');
 
 Route::get('/test', function() {
     return view('pages.owner.addmanager');

@@ -11,7 +11,7 @@
         margin: 8px 0;
         border: none;
         cursor: pointer;
-        width: 20%;
+        width: 40%;
     }
     th {
         width: 10%;
@@ -41,6 +41,7 @@
                 <th>วันที่ส่งเคลมสินค้า/วัตถุดิบ</th>
                 <!-- <th>วันที่รับเคลมสินค้า/วัตถุดิบ</th> -->
                 <th>สถานะ</th>
+                <th>ตัวเลือก</th>
             </tr>
             <tr>
                 <td>1</td>
@@ -51,10 +52,13 @@
                 <td>2-1-2019</td>
                 <!-- <td>10-1-2019</td> -->
                 <td>ยังไม่สมบูรณ์</td>
+                <td>
+                    <button>ลบ</button>
+                </td>
             </tr>
         </table>
         <center>
-            <button type="button" data-toggle="modal" data-target="#myModal">เพิ่มการเครม</button>
+            <button type="button" data-toggle="modal" data-target="#myModal" style="width:20%;">เพิ่มการเครม</button>
         </center>
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
